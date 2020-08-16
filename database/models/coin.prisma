@@ -1,0 +1,6 @@
+type Coin implements Model {
+  id: ID! @id
+  base: String! 
+  target: String! 
+  price: String!
+}

@@ -1,0 +1,5 @@
+# import Coin from "./generated/prisma-schema.graphql"
+
+type Query {
+  coins: [Coin!]!
+}

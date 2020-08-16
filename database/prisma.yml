@@ -1,0 +1,16 @@
+endpoint: http://localhost:4466
+databaseType: document
+datamodel:
+  - ./models/coin.prisma
+  - ./models/model.prisma
+
+seed:
+  import: ./seed.graphql
+
+secret: mySuperSecret
+
+generate:
+  - generator: javascript-client
+    output: ../server/generated/javascript-client/
+  - generator: graphql-schema
+    output: ../server/generated/prisma-schema.graphql

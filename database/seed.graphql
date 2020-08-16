@@ -1,0 +1,7 @@
+mutation {
+  coin1: createCoin(data: {
+    base: "BTC",
+    target: "EUR",
+    price: "9944.67466862",
+  }){ id }
+}
