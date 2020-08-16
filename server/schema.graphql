@@ -1,5 +1,15 @@
 # import Coin from "./generated/prisma-schema.graphql"
+# import CoinUpdateInput from "./generated/prisma-schema.graphql"
+# import CoinSubscriptionPayload from "./generated/prisma-schema.graphql"
 
 type Query {
   coins: [Coin!]!
+}
+
+type Mutation { 
+  updateCoin(id: ID!, input: CoinUpdateInput): Coin
+}
+
+type Subscription {
+  coins: CoinSubscriptionPayload
 }
