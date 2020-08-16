@@ -11,5 +11,5 @@ type Mutation {
 }
 
 type Subscription {
-  coins: CoinSubscriptionPayload
+  updatedCoin: CoinSubscriptionPayload
 }

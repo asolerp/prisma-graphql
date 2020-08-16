@@ -5,6 +5,7 @@ const { prisma } = require('./generated/javascript-client')
 
 
 
+
 const resolvers = {
   Query: {
     coins: (parent, args, context, info) => context.prisma.coins({}, info),
@@ -19,23 +20,21 @@ const resolvers = {
           price: args.price
         },
       }, info)
-      return newCoin
+      return updatedCoin
     },
   },
   Subscription: {
-    coins: {
+    updatedCoin: {
       subscribe: (parent, args, context, info) => {
-        return context.prisma.coin(
-          {
-            where: {
-              mutation_in: ['CREATED', 'UPDATED'],
-            },
-          },
-          info,
-        )
+        console.log(context.prisma._t)
+        return context.prisma.$subscribe
+          .coin({ mutation_in: ["UPDATED"] })
       },
-    },
-  },
+      resolve: payload => {
+        return payload;
+      }
+    }
+  }
 };
 
 const server = new GraphQLServer({
@@ -66,7 +65,7 @@ server.start(options, args => {
 
     // Update db with new fetched data
     await prisma.updateCoin({
-      where: { id: '5f393fde02743900072e4140' },
+      where: { id: '5f391722352df30007a3745f' },
       data: {
         base: base,
         target: target,
@@ -79,6 +78,6 @@ server.start(options, args => {
     } catch (err) {
       console.log(err)
     }
-  }, 30000)
+  }, 3000)
   console.log(`Server is running on http://localhost:${args.port}`)
 })
